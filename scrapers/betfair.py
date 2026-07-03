@@ -164,9 +164,9 @@ def _fetch_event_nodes(market_ids: list[str], batch_size: int = BETFAIR_BYMARKET
 
 def _selection_key(market_type: MarketType, runner_name: str, home_team: str, away_team: str) -> str | None:
     if market_type == MarketType.MATCH_ODDS:
-        if runner_name == home_team:
+        if runner_name.casefold() == home_team.casefold():
             return "HOME"
-        if runner_name == away_team:
+        if runner_name.casefold() == away_team.casefold():
             return "AWAY"
         return "DRAW"  # Betfair's third MATCH_ODDS runner is always "The Draw"
     if market_type == MarketType.BTTS:
